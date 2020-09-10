@@ -13,7 +13,8 @@ class _ConverterScreenState extends State<ConverterScreen> {
   List<String> items = [];
   List<String> name = [];
   List<String> country = [];
-  int indexCount = 0;
+  int indexTopCount = 0;
+  int indexBottomCount = 1;
   @override
   void initState() {
     getCode();
@@ -53,9 +54,10 @@ class _ConverterScreenState extends State<ConverterScreen> {
                 height: height,
                 width: width,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Container(
+                      padding: EdgeInsets.symmetric(vertical: height * 0.05),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -63,19 +65,15 @@ class _ConverterScreenState extends State<ConverterScreen> {
                             showUnderline: false,
                             items: country,
                             dropDownType: DropDownType.Button,
-                            hint: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 60),
-                              child: Text(
-                                country[indexCount],
-                                style: GoogleFonts.raleway(
-                                  color: Colors.black,
-                                ),
+                            hint: Text(
+                              country[indexTopCount],
+                              style: GoogleFonts.raleway(
+                                color: Colors.black,
                               ),
                             ),
                             onChanged: (value) {
                               setState(() {
-                                indexCount = country.indexOf(value);
+                                indexTopCount = country.indexOf(value);
                               });
                             },
                           ),
@@ -85,55 +83,52 @@ class _ConverterScreenState extends State<ConverterScreen> {
                             onChanged: (value) {
                               setState(
                                 () {
-                                  indexCount = items.indexOf(value);
+                                  indexTopCount = items.indexOf(value);
                                 },
                               );
                             },
                             dropDownType: DropDownType.Button,
                             hint: Text(
-                              items[indexCount],
+                              items[indexTopCount],
                               style: GoogleFonts.raleway(
                                 color: Colors.black,
                               ),
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 20),
-                            child: Text(
-                              '56.67',
-                              style: GoogleFonts.acme(
-                                color: Colors.black,
-                                fontSize: height * 0.10,
-                              ),
+                          Text(
+                            '56.67',
+                            style: GoogleFonts.acme(
+                              color: Colors.black,
+                              fontSize: height * 0.10,
                             ),
                           )
                         ],
                       ),
                     ),
-                    Divider(
-                      height: height * 0.001,
-                      color: Colors.grey,
-                    ),
                     Container(
+                      padding: EdgeInsets.symmetric(vertical: height * 0.05),
                       child: Column(
                         children: [
+                          Text(
+                            '56.67',
+                            style: GoogleFonts.acme(
+                              color: Colors.black,
+                              fontSize: height * 0.10,
+                            ),
+                          ),
                           DropDown(
                             showUnderline: false,
                             items: country,
                             dropDownType: DropDownType.Button,
-                            hint: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 60),
-                              child: Text(
-                                country[indexCount],
-                                style: GoogleFonts.raleway(
-                                  color: Colors.black,
-                                ),
+                            hint: Text(
+                              country[indexBottomCount],
+                              style: GoogleFonts.raleway(
+                                color: Colors.black,
                               ),
                             ),
                             onChanged: (value) {
                               setState(() {
-                                indexCount = country.indexOf(value);
+                                indexBottomCount = country.indexOf(value);
                               });
                             },
                           ),
@@ -143,28 +138,18 @@ class _ConverterScreenState extends State<ConverterScreen> {
                             onChanged: (value) {
                               setState(
                                 () {
-                                  indexCount = items.indexOf(value);
+                                  indexBottomCount = items.indexOf(value);
                                 },
                               );
                             },
                             dropDownType: DropDownType.Button,
                             hint: Text(
-                              items[indexCount],
+                              items[indexBottomCount],
                               style: GoogleFonts.raleway(
                                 color: Colors.black,
                               ),
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 20),
-                            child: Text(
-                              '56.67',
-                              style: GoogleFonts.acme(
-                                color: Colors.black,
-                                fontSize: height * 0.10,
-                              ),
-                            ),
-                          )
                         ],
                       ),
                     ),
@@ -179,6 +164,24 @@ class _ConverterScreenState extends State<ConverterScreen> {
                   color: topContainer,
                   width: width,
                   height: height * 0.10,
+                  child: Align(
+                    alignment: Alignment.topLeft,
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                          top: height * 0.001, left: width * 0.04),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text('Percent Conversion Charge ',
+                              style: GoogleFonts.raleway(
+                                  fontSize: height * 0.025,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white)),
+                          Container()
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
               ),
               alignment: Alignment.topCenter,
@@ -193,6 +196,44 @@ class _ConverterScreenState extends State<ConverterScreen> {
                 ),
               ),
               alignment: Alignment.bottomCenter,
+            ),
+            Align(
+              alignment: Alignment.center,
+              child: Divider(
+                height: height * 0.001,
+                color: Colors.grey,
+              ),
+            ),
+            Align(
+              alignment: Alignment.center,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 350),
+                child: Scaffold(
+                  backgroundColor: Colors.transparent,
+                  floatingActionButton: FloatingActionButton(
+                    heroTag: "btn1",
+                    elevation: 8,
+                    onPressed: () {},
+                    child: ShaderMask(
+                      shaderCallback: (Rect bounds) {
+                        return RadialGradient(
+                          center: Alignment.center,
+                          radius: 0.5,
+                          colors: <Color>[Color(0xffDA44bb), Color(0xff8921aa)],
+                          tileMode: TileMode.repeated,
+                        ).createShader(bounds);
+                      },
+                      child: Icon(
+                        Icons.swap_vert,
+                        size: 32.0,
+                      ),
+                    ),
+                    backgroundColor: Colors.white,
+                  ),
+                  floatingActionButtonLocation:
+                      FloatingActionButtonLocation.centerTop,
+                ),
+              ),
             ),
           ],
         ),
