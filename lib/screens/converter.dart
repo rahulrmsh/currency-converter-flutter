@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:currency_converter/utilities/constants.dart';
 import 'package:currency_converter/utilities/data.dart';
 import 'package:flutter/material.dart';
@@ -10,15 +12,24 @@ class ConverterScreen extends StatefulWidget {
 }
 
 class _ConverterScreenState extends State<ConverterScreen> {
+  TextEditingController _controller;
+  TextEditingController _controllerTop;
+  TextEditingController _controllerBtm;
   List<String> items = [];
   List<String> name = [];
   List<String> country = [];
   int indexTopCount = 0;
   int indexBottomCount = 1;
+  double percentCount = 1;
+  Double topCount;
+  Double bottomCount;
   @override
   void initState() {
     getCode();
     super.initState();
+    _controller = new TextEditingController(text: percentCount.toString());
+    _controllerTop = new TextEditingController(text: topCount.toString());
+    _controllerBtm = new TextEditingController(text: bottomCount.toString());
   }
 
   void getCode() {
@@ -35,9 +46,6 @@ class _ConverterScreenState extends State<ConverterScreen> {
         }
       });
     });
-    print(items);
-    print(name);
-    print(country);
   }
 
   @override
@@ -95,13 +103,30 @@ class _ConverterScreenState extends State<ConverterScreen> {
                               ),
                             ),
                           ),
-                          Text(
-                            '56.67',
+                          TextFormField(
+                            maxLength: 6,
+                            onChanged: (value) {
+                              _controller = TextEditingController(text: value);
+                              setState(() {
+                                percentCount = double.tryParse(value);
+                              });
+                            },
+                            controller: _controllerTop,
+                            keyboardType: TextInputType.number,
+                            textAlign: TextAlign.center,
                             style: GoogleFonts.acme(
                               color: Colors.black,
                               fontSize: height * 0.10,
                             ),
-                          )
+                            decoration: InputDecoration(
+                              counterText: "",
+                              border: InputBorder.none,
+                              focusedBorder: InputBorder.none,
+                              enabledBorder: InputBorder.none,
+                              errorBorder: InputBorder.none,
+                              disabledBorder: InputBorder.none,
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -109,11 +134,28 @@ class _ConverterScreenState extends State<ConverterScreen> {
                       padding: EdgeInsets.symmetric(vertical: height * 0.05),
                       child: Column(
                         children: [
-                          Text(
-                            '56.67',
+                          TextFormField(
+                            maxLength: 6,
+                            onChanged: (value) {
+                              _controller = TextEditingController(text: value);
+                              setState(() {
+                                percentCount = double.tryParse(value);
+                              });
+                            },
+                            controller: _controllerBtm,
+                            keyboardType: TextInputType.number,
+                            textAlign: TextAlign.center,
                             style: GoogleFonts.acme(
                               color: Colors.black,
                               fontSize: height * 0.10,
+                            ),
+                            decoration: InputDecoration(
+                              counterText: "",
+                              border: InputBorder.none,
+                              focusedBorder: InputBorder.none,
+                              enabledBorder: InputBorder.none,
+                              errorBorder: InputBorder.none,
+                              disabledBorder: InputBorder.none,
                             ),
                           ),
                           DropDown(
@@ -160,25 +202,65 @@ class _ConverterScreenState extends State<ConverterScreen> {
             Align(
               child: Hero(
                 tag: 'topContainer',
-                child: Container(
-                  color: topContainer,
-                  width: width,
-                  height: height * 0.10,
-                  child: Align(
-                    alignment: Alignment.topLeft,
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                          top: height * 0.001, left: width * 0.04),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text('Percent Conversion Charge ',
+                child: Material(
+                  child: Container(
+                    color: topContainer,
+                    width: width,
+                    height: height * 0.10,
+                    child: Align(
+                      alignment: Alignment.topLeft,
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                            top: height * 0.029, left: width * 0.04),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text(
+                              'Percent Conversion Charge ',
                               style: GoogleFonts.raleway(
                                   fontSize: height * 0.025,
                                   fontWeight: FontWeight.w600,
-                                  color: Colors.white)),
-                          Container()
-                        ],
+                                  color: Colors.white),
+                            ),
+                            Container(
+                              width: width * 0.2,
+                              height: width * 0.1,
+                              padding: EdgeInsets.all(4),
+                              decoration: BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(5)),
+                                  shape: BoxShape.rectangle,
+                                  color: topContainer,
+                                  border: Border.all(
+                                      color: Colors.white, width: 1.4)),
+                              child: TextFormField(
+                                maxLength: 6,
+                                onChanged: (value) {
+                                  _controller =
+                                      TextEditingController(text: value);
+                                  setState(() {
+                                    percentCount = double.tryParse(value);
+                                  });
+                                },
+                                controller: _controller,
+                                keyboardType: TextInputType.number,
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.raleway(
+                                    fontSize: height * 0.025,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.white),
+                                decoration: InputDecoration(
+                                  counterText: "",
+                                  border: InputBorder.none,
+                                  focusedBorder: InputBorder.none,
+                                  enabledBorder: InputBorder.none,
+                                  errorBorder: InputBorder.none,
+                                  disabledBorder: InputBorder.none,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -219,13 +301,13 @@ class _ConverterScreenState extends State<ConverterScreen> {
                         return RadialGradient(
                           center: Alignment.center,
                           radius: 0.5,
-                          colors: <Color>[Color(0xffDA44bb), Color(0xff8921aa)],
-                          tileMode: TileMode.repeated,
+                          colors: <Color>[Color(0xFF0466c8), Color(0xFF081c15)],
+                          tileMode: TileMode.mirror,
                         ).createShader(bounds);
                       },
                       child: Icon(
-                        Icons.swap_vert,
-                        size: 32.0,
+                        Icons.swap_vert_circle_sharp,
+                        size: 56.0,
                       ),
                     ),
                     backgroundColor: Colors.white,
