@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:currency_converter/screens/converter.dart';
 import 'package:currency_converter/utilities/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -8,6 +11,38 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  bool _visible = true;
+  @override
+  void initState() {
+    super.initState();
+    Timer(Duration(seconds: 3), () {
+      setState(() {
+        _visible = !_visible;
+      });
+      Navigator.push(
+        context,
+        PageRouteBuilder(
+          transitionDuration: Duration(milliseconds: 3000),
+          pageBuilder: (BuildContext context, Animation<double> animation,
+              Animation<double> secondaryAnimation) {
+            return ConverterScreen();
+          },
+          transitionsBuilder: (BuildContext context,
+              Animation<double> animation,
+              Animation<double> secondaryAnimation,
+              Widget child) {
+            return Align(
+              child: FadeTransition(
+                opacity: animation,
+                child: child,
+              ),
+            );
+          },
+        ),
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final height = (MediaQuery.of(context).size.height);
@@ -17,18 +52,24 @@ class _SplashScreenState extends State<SplashScreen> {
         body: Stack(
           children: [
             Align(
-              child: Container(
-                color: topContainer,
-                width: width,
-                height: height * 0.50,
+              child: Hero(
+                tag: 'topContainer',
+                child: Container(
+                  color: topContainer,
+                  width: width,
+                  height: height * 0.50,
+                ),
               ),
               alignment: Alignment.topCenter,
             ),
             Align(
-              child: Container(
-                color: bottomContainer,
-                width: width,
-                height: height * 0.50,
+              child: Hero(
+                tag: 'bottomContainer',
+                child: Container(
+                  color: bottomContainer,
+                  width: width,
+                  height: height * 0.50,
+                ),
               ),
               alignment: Alignment.bottomCenter,
             ),
@@ -58,12 +99,16 @@ class _SplashScreenState extends State<SplashScreen> {
                 ),
               ),
             ),
-            Align(
-              alignment: Alignment.center,
-              child: Image(
-                image: AssetImage('images/gold1.png'),
-                height: height * 0.70,
-                width: width * 0.70,
+            AnimatedOpacity(
+              duration: Duration(milliseconds: 00),
+              opacity: _visible ? 1.0 : 0.0,
+              child: Align(
+                alignment: Alignment.center,
+                child: Image(
+                  image: AssetImage('images/gold1.png'),
+                  height: height * 0.70,
+                  width: width * 0.70,
+                ),
               ),
             )
           ],
