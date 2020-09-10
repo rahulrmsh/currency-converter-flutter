@@ -1,3 +1,4 @@
+import 'package:currency_converter/screens/converter.dart';
 import 'package:currency_converter/screens/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -23,6 +24,7 @@ class _MainAppState extends State<MainApp> {
       initialRoute: 'splash',
       routes: {
         'splash': (context) => SplashScreen(),
+        'converter': (context) => ConverterScreen(),
       },
     );
   }
