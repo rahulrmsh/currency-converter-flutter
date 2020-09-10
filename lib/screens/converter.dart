@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:currency_converter/utilities/constants.dart';
 import 'package:currency_converter/utilities/data.dart';
 import 'package:flutter/material.dart';
@@ -21,8 +19,8 @@ class _ConverterScreenState extends State<ConverterScreen> {
   int indexTopCount = 0;
   int indexBottomCount = 1;
   double percentCount = 1;
-  Double topCount;
-  Double bottomCount;
+  double topCount = 0.0;
+  double bottomCount = 0.0;
   @override
   void initState() {
     getCode();
@@ -104,9 +102,10 @@ class _ConverterScreenState extends State<ConverterScreen> {
                             ),
                           ),
                           TextFormField(
-                            maxLength: 6,
+                            maxLength: 9,
                             onChanged: (value) {
-                              _controller = TextEditingController(text: value);
+                              _controllerTop =
+                                  TextEditingController(text: value);
                               setState(() {
                                 percentCount = double.tryParse(value);
                               });
@@ -135,9 +134,10 @@ class _ConverterScreenState extends State<ConverterScreen> {
                       child: Column(
                         children: [
                           TextFormField(
-                            maxLength: 6,
+                            maxLength: 9,
                             onChanged: (value) {
-                              _controller = TextEditingController(text: value);
+                              _controllerBtm =
+                                  TextEditingController(text: value);
                               setState(() {
                                 percentCount = double.tryParse(value);
                               });
