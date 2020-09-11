@@ -1,4 +1,6 @@
+import 'dart:convert';
 import 'package:currency_converter/utilities/constants.dart';
+import 'package:http/http.dart' as http;
 import 'package:currency_converter/utilities/data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dropdown/flutter_dropdown.dart';
@@ -10,6 +12,7 @@ class ConverterScreen extends StatefulWidget {
 }
 
 class _ConverterScreenState extends State<ConverterScreen> {
+  Map crossItem = {};
   TextEditingController _controller;
   TextEditingController _controllerTop;
   TextEditingController _controllerBtm;
@@ -19,11 +22,14 @@ class _ConverterScreenState extends State<ConverterScreen> {
   int indexTopCount = 0;
   int indexBottomCount = 1;
   double percentCount = 1;
-  double topCount = 0.0;
-  double bottomCount = 0.0;
+  double topCount = 1.0;
+  double rate = 0;
+  double bottomCount = 1.0;
   @override
   void initState() {
     getCode();
+    getRates(items[indexTopCount], items[indexBottomCount]);
+
     super.initState();
     _controller = new TextEditingController(text: percentCount.toString());
     _controllerTop = new TextEditingController(text: topCount.toString());
@@ -46,6 +52,47 @@ class _ConverterScreenState extends State<ConverterScreen> {
     });
   }
 
+  void getRates(String fromCode, String toCode) async {
+    try {
+      final response = await http
+          .get('https://api.exchangeratesapi.io/latest?base=' + fromCode);
+      if (response.statusCode == 200) {
+        var list = json.decode(response.body) as Map;
+        list.forEach((key, value) {
+          if (key == 'rates') {
+            crossItem.addAll(value);
+            crossItem.forEach((key, value) {
+              if (key == toCode) {
+                setState(() {
+                  rate = value;
+                  setRates();
+                });
+              }
+            });
+          }
+        });
+      } else {
+        print(0);
+      }
+    } catch (e) {
+      print('Something happened');
+      print(e);
+    }
+  }
+
+  void setRates() {
+    setState(() {
+      bottomCount = topCount * rate;
+      bottomCount = bottomCount + bottomCount * percentCount;
+      _controller =
+          TextEditingController(text: percentCount.toStringAsFixed(2));
+      _controllerTop = TextEditingController(text: topCount.toStringAsFixed(2));
+      _controllerBtm =
+          TextEditingController(text: bottomCount.toStringAsFixed(2));
+    });
+  }
+
+  void swapValues() {}
   @override
   Widget build(BuildContext context) {
     final height = (MediaQuery.of(context).size.height);
@@ -80,26 +127,10 @@ class _ConverterScreenState extends State<ConverterScreen> {
                             onChanged: (value) {
                               setState(() {
                                 indexTopCount = country.indexOf(value);
+                                getRates(items[indexTopCount],
+                                    items[indexBottomCount]);
                               });
                             },
-                          ),
-                          DropDown(
-                            showUnderline: false,
-                            items: items,
-                            onChanged: (value) {
-                              setState(
-                                () {
-                                  indexTopCount = items.indexOf(value);
-                                },
-                              );
-                            },
-                            dropDownType: DropDownType.Button,
-                            hint: Text(
-                              items[indexTopCount],
-                              style: GoogleFonts.raleway(
-                                color: Colors.black,
-                              ),
-                            ),
                           ),
                           TextFormField(
                             maxLength: 9,
@@ -107,7 +138,9 @@ class _ConverterScreenState extends State<ConverterScreen> {
                               _controllerTop =
                                   TextEditingController(text: value);
                               setState(() {
-                                percentCount = double.tryParse(value);
+                                topCount = double.tryParse(value);
+                                getRates(items[indexTopCount],
+                                    items[indexBottomCount]);
                               });
                             },
                             controller: _controllerTop,
@@ -139,7 +172,9 @@ class _ConverterScreenState extends State<ConverterScreen> {
                               _controllerBtm =
                                   TextEditingController(text: value);
                               setState(() {
-                                percentCount = double.tryParse(value);
+                                bottomCount = double.tryParse(value);
+                                getRates(items[indexTopCount],
+                                    items[indexBottomCount]);
                               });
                             },
                             controller: _controllerBtm,
@@ -171,26 +206,10 @@ class _ConverterScreenState extends State<ConverterScreen> {
                             onChanged: (value) {
                               setState(() {
                                 indexBottomCount = country.indexOf(value);
+                                getRates(items[indexTopCount],
+                                    items[indexBottomCount]);
                               });
                             },
-                          ),
-                          DropDown(
-                            showUnderline: false,
-                            items: items,
-                            onChanged: (value) {
-                              setState(
-                                () {
-                                  indexBottomCount = items.indexOf(value);
-                                },
-                              );
-                            },
-                            dropDownType: DropDownType.Button,
-                            hint: Text(
-                              items[indexBottomCount],
-                              style: GoogleFonts.raleway(
-                                color: Colors.black,
-                              ),
-                            ),
                           ),
                         ],
                       ),
@@ -240,6 +259,8 @@ class _ConverterScreenState extends State<ConverterScreen> {
                                       TextEditingController(text: value);
                                   setState(() {
                                     percentCount = double.tryParse(value);
+                                    getRates(items[indexTopCount],
+                                        items[indexBottomCount]);
                                   });
                                 },
                                 controller: _controller,
@@ -275,6 +296,16 @@ class _ConverterScreenState extends State<ConverterScreen> {
                   color: bottomContainer,
                   width: width,
                   height: height * 0.10,
+                  child: FlatButton(
+                    child: Text(
+                      'swap',
+                      style: GoogleFonts.raleway(
+                          fontSize: height * 0.025,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white),
+                    ),
+                    onPressed: null,
+                  ),
                 ),
               ),
               alignment: Alignment.bottomCenter,
@@ -284,37 +315,6 @@ class _ConverterScreenState extends State<ConverterScreen> {
               child: Divider(
                 height: height * 0.001,
                 color: Colors.grey,
-              ),
-            ),
-            Align(
-              alignment: Alignment.center,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 350),
-                child: Scaffold(
-                  backgroundColor: Colors.transparent,
-                  floatingActionButton: FloatingActionButton(
-                    heroTag: "btn1",
-                    elevation: 8,
-                    onPressed: () {},
-                    child: ShaderMask(
-                      shaderCallback: (Rect bounds) {
-                        return RadialGradient(
-                          center: Alignment.center,
-                          radius: 0.5,
-                          colors: <Color>[Color(0xFF0466c8), Color(0xFF081c15)],
-                          tileMode: TileMode.mirror,
-                        ).createShader(bounds);
-                      },
-                      child: Icon(
-                        Icons.swap_vert_circle_sharp,
-                        size: 56.0,
-                      ),
-                    ),
-                    backgroundColor: Colors.white,
-                  ),
-                  floatingActionButtonLocation:
-                      FloatingActionButtonLocation.centerTop,
-                ),
               ),
             ),
           ],
