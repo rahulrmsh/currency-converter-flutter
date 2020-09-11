@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dropdown/flutter_dropdown.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
 class ConverterScreen extends StatefulWidget {
   @override
   _ConverterScreenState createState() => _ConverterScreenState();
@@ -85,8 +87,14 @@ class _ConverterScreenState extends State<ConverterScreen> {
         print(0);
       }
     } catch (e) {
-      print('Something happened');
-      print(e);
+      _scaffoldKey.currentState.showSnackBar(SnackBar(
+        backgroundColor: Colors.red,
+        content: Text(
+          'Check Your Internet Connection.',
+          style: TextStyle(color: Colors.white),
+        ),
+        duration: Duration(seconds: 5),
+      ));
     }
   }
 
@@ -130,6 +138,7 @@ class _ConverterScreenState extends State<ConverterScreen> {
           return Future.value(false);
         },
         child: Scaffold(
+          key: _scaffoldKey,
           resizeToAvoidBottomInset: false,
           resizeToAvoidBottomPadding: false,
           body: Stack(

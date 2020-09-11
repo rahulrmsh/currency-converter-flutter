@@ -15,14 +15,14 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 3), () {
+    Timer(Duration(seconds: 2), () {
       setState(() {
         _visible = !_visible;
       });
       Navigator.push(
         context,
         PageRouteBuilder(
-          transitionDuration: Duration(milliseconds: 3000),
+          transitionDuration: Duration(milliseconds: 4000),
           pageBuilder: (BuildContext context, Animation<double> animation,
               Animation<double> secondaryAnimation) {
             return ConverterScreen();
@@ -102,7 +102,7 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             ),
             AnimatedOpacity(
-              duration: Duration(milliseconds: 00),
+              duration: Duration(milliseconds: 1000),
               opacity: _visible ? 1.0 : 0.0,
               child: Align(
                 alignment: Alignment.center,
