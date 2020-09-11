@@ -79,7 +79,6 @@ class _ConverterScreenState extends State<ConverterScreen> {
           if (key == 'date') {
             setState(() {
               dateIndex = value;
-              print(dateIndex);
             });
           }
         });
