@@ -28,9 +28,9 @@
 24        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
 24-->[androidx.core:core:1.1.0] /home/creator/.gradle/caches/transforms-2/files-2.1/a528b13ac93e64cafa3d0480e2c93207/core-1.1.0/AndroidManifest.xml:24:18-86
 25        android:debuggable="true"
-26        android:icon="@mipmap/ic_launcher"
-26-->/home/creator/Documents/Programs/Flutter/currency-converter/android/app/src/main/AndroidManifest.xml:11:9-43
-27        android:label="currency_converter" >
+26        android:icon="@mipmap/launcher_icon"
+26-->/home/creator/Documents/Programs/Flutter/currency-converter/android/app/src/main/AndroidManifest.xml:11:9-45
+27        android:label="Currency Converter" >
 27-->/home/creator/Documents/Programs/Flutter/currency-converter/android/app/src/main/AndroidManifest.xml:10:9-43
 28        <activity
 28-->/home/creator/Documents/Programs/Flutter/currency-converter/android/app/src/main/AndroidManifest.xml:12:9-40:20

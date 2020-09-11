@@ -47,7 +47,7 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /home/creat
 	android:label
 		ADDED from /home/creator/Documents/Programs/Flutter/currency-converter/android/app/src/main/AndroidManifest.xml:10:9-43
 	android:icon
-		ADDED from /home/creator/Documents/Programs/Flutter/currency-converter/android/app/src/main/AndroidManifest.xml:11:9-43
+		ADDED from /home/creator/Documents/Programs/Flutter/currency-converter/android/app/src/main/AndroidManifest.xml:11:9-45
 	android:name
 		ADDED from /home/creator/Documents/Programs/Flutter/currency-converter/android/app/src/main/AndroidManifest.xml:9:9-57
 activity#com.example.currency_converter.MainActivity

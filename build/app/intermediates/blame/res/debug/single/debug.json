@@ -4,6 +4,10 @@
         "source": "/home/creator/Documents/Programs/Flutter/currency-converter/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png"
     },
     {
+        "merged": "/home/creator/Documents/Programs/Flutter/currency-converter/build/app/intermediates/res/merged/debug/mipmap-xhdpi_launcher_icon.png.flat",
+        "source": "/home/creator/Documents/Programs/Flutter/currency-converter/android/app/src/main/res/mipmap-xhdpi/launcher_icon.png"
+    },
+    {
         "merged": "/home/creator/Documents/Programs/Flutter/currency-converter/build/app/intermediates/res/merged/debug/drawable-v21_notification_action_background.xml.flat",
         "source": "/home/creator/.gradle/caches/transforms-2/files-2.1/a528b13ac93e64cafa3d0480e2c93207/core-1.1.0/res/drawable-v21/notification_action_background.xml"
     },
@@ -76,12 +80,24 @@
         "source": "/home/creator/.gradle/caches/transforms-2/files-2.1/a528b13ac93e64cafa3d0480e2c93207/core-1.1.0/res/drawable-xhdpi-v4/notification_bg_normal_pressed.9.png"
     },
     {
+        "merged": "/home/creator/Documents/Programs/Flutter/currency-converter/build/app/intermediates/res/merged/debug/mipmap-mdpi_launcher_icon.png.flat",
+        "source": "/home/creator/Documents/Programs/Flutter/currency-converter/android/app/src/main/res/mipmap-mdpi/launcher_icon.png"
+    },
+    {
         "merged": "/home/creator/Documents/Programs/Flutter/currency-converter/build/app/intermediates/res/merged/debug/layout_notification_template_icon_group.xml.flat",
         "source": "/home/creator/.gradle/caches/transforms-2/files-2.1/a528b13ac93e64cafa3d0480e2c93207/core-1.1.0/res/layout/notification_template_icon_group.xml"
     },
     {
         "merged": "/home/creator/Documents/Programs/Flutter/currency-converter/build/app/intermediates/res/merged/debug/mipmap-xxxhdpi_ic_launcher.png.flat",
         "source": "/home/creator/Documents/Programs/Flutter/currency-converter/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/home/creator/Documents/Programs/Flutter/currency-converter/build/app/intermediates/res/merged/debug/mipmap-xxxhdpi_launcher_icon.png.flat",
+        "source": "/home/creator/Documents/Programs/Flutter/currency-converter/android/app/src/main/res/mipmap-xxxhdpi/launcher_icon.png"
+    },
+    {
+        "merged": "/home/creator/Documents/Programs/Flutter/currency-converter/build/app/intermediates/res/merged/debug/mipmap-xxhdpi_launcher_icon.png.flat",
+        "source": "/home/creator/Documents/Programs/Flutter/currency-converter/android/app/src/main/res/mipmap-xxhdpi/launcher_icon.png"
     },
     {
         "merged": "/home/creator/Documents/Programs/Flutter/currency-converter/build/app/intermediates/res/merged/debug/drawable-mdpi-v4_notification_bg_low_normal.9.png.flat",
@@ -114,6 +130,10 @@
     {
         "merged": "/home/creator/Documents/Programs/Flutter/currency-converter/build/app/intermediates/res/merged/debug/layout-v21_notification_template_icon_group.xml.flat",
         "source": "/home/creator/.gradle/caches/transforms-2/files-2.1/a528b13ac93e64cafa3d0480e2c93207/core-1.1.0/res/layout-v21/notification_template_icon_group.xml"
+    },
+    {
+        "merged": "/home/creator/Documents/Programs/Flutter/currency-converter/build/app/intermediates/res/merged/debug/mipmap-hdpi_launcher_icon.png.flat",
+        "source": "/home/creator/Documents/Programs/Flutter/currency-converter/android/app/src/main/res/mipmap-hdpi/launcher_icon.png"
     },
     {
         "merged": "/home/creator/Documents/Programs/Flutter/currency-converter/build/app/intermediates/res/merged/debug/mipmap-mdpi_ic_launcher.png.flat",

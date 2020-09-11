@@ -190,6 +190,7 @@ class _ConverterScreenState extends State<ConverterScreen> {
                         child: Column(
                           children: [
                             TextFormField(
+                              enabled: false,
                               maxLength: 9,
                               onChanged: (value) {
                                 _controllerBtm =
