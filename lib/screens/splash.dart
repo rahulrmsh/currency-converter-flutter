@@ -49,6 +49,8 @@ class _SplashScreenState extends State<SplashScreen> {
     final width = (MediaQuery.of(context).size.width);
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        resizeToAvoidBottomPadding: false,
         body: Stack(
           children: [
             Align(
