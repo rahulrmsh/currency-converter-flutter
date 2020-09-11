@@ -91,7 +91,7 @@ class _ConverterScreenState extends State<ConverterScreen> {
         backgroundColor: Colors.red,
         content: Text(
           'Check Your Internet Connection.',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: whiteBgColor),
         ),
         duration: Duration(seconds: 5),
       ));
@@ -282,7 +282,7 @@ class _ConverterScreenState extends State<ConverterScreen> {
                                 style: GoogleFonts.raleway(
                                     fontSize: height * 0.025,
                                     fontWeight: FontWeight.w600,
-                                    color: Colors.white),
+                                    color: whiteBgColor),
                               ),
                               Container(
                                 width: width * 0.2,
@@ -294,7 +294,7 @@ class _ConverterScreenState extends State<ConverterScreen> {
                                     shape: BoxShape.rectangle,
                                     color: topContainer,
                                     border: Border.all(
-                                        color: Colors.white, width: 1.4)),
+                                        color: whiteBgColor, width: 1.4)),
                                 child: TextFormField(
                                   maxLength: 6,
                                   onChanged: (value) {
@@ -312,7 +312,7 @@ class _ConverterScreenState extends State<ConverterScreen> {
                                   style: GoogleFonts.raleway(
                                       fontSize: height * 0.025,
                                       fontWeight: FontWeight.w600,
-                                      color: Colors.white),
+                                      color: whiteBgColor),
                                   decoration: InputDecoration(
                                     counterText: "",
                                     border: InputBorder.none,
@@ -344,9 +344,9 @@ class _ConverterScreenState extends State<ConverterScreen> {
                     child: OutlineButton(
                       shape: new RoundedRectangleBorder(
                           borderRadius: new BorderRadius.circular(5.0)),
-                      highlightedBorderColor: Colors.white,
+                      highlightedBorderColor: whiteBgColor,
                       borderSide: BorderSide(
-                          color: Colors.white,
+                          color: whiteBgColor,
                           style: BorderStyle.solid,
                           width: 2),
                       child: Text(
@@ -354,7 +354,7 @@ class _ConverterScreenState extends State<ConverterScreen> {
                         style: GoogleFonts.raleway(
                             fontSize: height * 0.025,
                             fontWeight: FontWeight.w600,
-                            color: Colors.white),
+                            color: whiteBgColor),
                       ),
                       onPressed: () {
                         setState(() {
@@ -386,9 +386,9 @@ class _ConverterScreenState extends State<ConverterScreen> {
                         fontWeight: FontWeight.w600,
                         color: Colors.grey),
                     decoration: InputDecoration(
-                      focusColor: Colors.white,
-                      hoverColor: Colors.white,
-                      fillColor: Colors.white,
+                      focusColor: whiteBgColor,
+                      hoverColor: whiteBgColor,
+                      fillColor: whiteBgColor,
                       counterText: "",
                       border: InputBorder.none,
                       focusedBorder: InputBorder.none,

@@ -84,7 +84,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   style: GoogleFonts.acme(
                       fontWeight: FontWeight.bold,
                       fontSize: width * 0.15,
-                      color: Colors.white),
+                      color: whiteBgColor),
                 ),
               ),
             ),
@@ -97,7 +97,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   style: GoogleFonts.acme(
                       fontWeight: FontWeight.bold,
                       fontSize: width * 0.15,
-                      color: Colors.white),
+                      color: whiteBgColor),
                 ),
               ),
             ),
