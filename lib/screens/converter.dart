@@ -17,9 +17,11 @@ class _ConverterScreenState extends State<ConverterScreen> {
   TextEditingController _controller;
   TextEditingController _controllerTop;
   TextEditingController _controllerBtm;
+  TextEditingController _controllerDate;
   List<String> items = [];
   List<String> name = [];
   List<String> country = [];
+  String dateIndex = '';
   int indexTopCount = 0;
   int indexBottomCount = 1;
   double percentCount = 1;
@@ -35,6 +37,7 @@ class _ConverterScreenState extends State<ConverterScreen> {
     _controller = new TextEditingController(text: percentCount.toString());
     _controllerTop = new TextEditingController(text: topCount.toString());
     _controllerBtm = new TextEditingController(text: bottomCount.toString());
+    _controllerDate = new TextEditingController(text: "As Per " + dateIndex);
   }
 
   void getCode() {
@@ -71,6 +74,12 @@ class _ConverterScreenState extends State<ConverterScreen> {
               }
             });
           }
+          if (key == 'date') {
+            setState(() {
+              dateIndex = value;
+              print(dateIndex);
+            });
+          }
         });
       } else {
         print(0);
@@ -90,6 +99,7 @@ class _ConverterScreenState extends State<ConverterScreen> {
       _controllerTop = TextEditingController(text: topCount.toStringAsFixed(2));
       _controllerBtm =
           TextEditingController(text: bottomCount.toStringAsFixed(2));
+      _controllerDate = new TextEditingController(text: "As Per " + dateIndex);
     });
   }
 
@@ -349,11 +359,37 @@ class _ConverterScreenState extends State<ConverterScreen> {
               ),
               Align(
                 alignment: Alignment.center,
-                child: Divider(
-                  height: height * 0.001,
-                  color: Colors.grey,
+                child: Container(
+                  child: TextFormField(
+                    enabled: false,
+                    onChanged: (value) {
+                      _controller = TextEditingController(text: value);
+                      setState(() {
+                        percentCount = double.tryParse(value);
+                        getRates(items[indexTopCount], items[indexBottomCount]);
+                      });
+                    },
+                    controller: _controllerDate,
+                    keyboardType: TextInputType.number,
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.raleway(
+                        fontSize: height * 0.025,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.grey),
+                    decoration: InputDecoration(
+                      focusColor: Colors.white,
+                      hoverColor: Colors.white,
+                      fillColor: Colors.white,
+                      counterText: "",
+                      border: InputBorder.none,
+                      focusedBorder: InputBorder.none,
+                      enabledBorder: InputBorder.none,
+                      errorBorder: InputBorder.none,
+                      disabledBorder: InputBorder.none,
+                    ),
+                  ),
                 ),
-              ),
+              )
             ],
           ),
         ),
